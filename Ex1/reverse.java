@@ -12,7 +12,7 @@ public static String reverseArray(String arr) {
 }
 
 public static void main(String[] args) {
-	String arr = "abcde";
+	String arr = "abcdefg";
 	
 	System.out.println(arr);
 	System.out.print(reverseArray(arr));
