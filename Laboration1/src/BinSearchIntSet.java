@@ -1,14 +1,17 @@
 public class BinSearchIntSet implements IntSet{
 
 		
-	int[] set = new int[0];
+	int[] set = new int[1];
 	int indexOfElement = 0;
+	int size = 0;
 
-	public void add(int element) {
+	/*public void add(int element) {
 					
 		if(!contains(element)) {
 			int[] newSet = new int[set.length+1];
-			//indexOfElement = newSet.length-1;
+			newSet[] = 
+			
+			indexOfElement = newSet.length-1;
 			for(int i=0; i<indexOfElement; i++) {
 				newSet[i] = set[i];
 			}		    	
@@ -19,14 +22,29 @@ public class BinSearchIntSet implements IntSet{
 			}
 			set = newSet;
 		}
+			
 	   return;
 	   
-	 }
+	 }*/
+	
+	
+	public void add(int element) {
+    	if(!(contains(element))) {
+    		int [] newSet = new int[size+1];
+    		for(int i=0; i<size; i++) {
+    			newSet[i] = set[i];
+    			}
+    		newSet[size] = element;
+    		set = newSet;
+    		sort();
+    		size++;
+    		}
+    	}
 		
 		public boolean contains(int element){
 			sort();
 			
-			int upperBound=set.length-1;
+			int upperBound=size-1;
 			int lowerBound = 0;
 			
 			
@@ -61,7 +79,7 @@ public class BinSearchIntSet implements IntSet{
 			return;
 		}
 		
-/*		public int indexOf(int element){
+		public int indexOf(int element){
 			for(int i=0; i<set.length; i++) {
 				if(element == set[i]) {
 					return i;
@@ -69,7 +87,7 @@ public class BinSearchIntSet implements IntSet{
 			}
 			return -1;
 		}
-		*/
+		
 						    	
 		  		   
 		/*public void remove(int element){
@@ -92,7 +110,7 @@ public class BinSearchIntSet implements IntSet{
 			}*/
 		
 		
-		public void remove(int element){
+	/*	public void remove(int element){
 			//if (index == -1) return;
 			if(set.length==0) return;
 			
@@ -109,7 +127,20 @@ public class BinSearchIntSet implements IntSet{
 				//index = indexOfElement;
 				}
 			}
+		*/
 		
+		   
+		public void remove(int element){
+			int index = indexOf(element);
+				while(contains(element)) {
+				for(int i=index; i<size-1; i++) {
+						set[i]=set[i+1]; // remove???
+					}
+				index = indexOf(element);
+				size--;
+				}
+			}
+			
 		
 		public static void main(String[] args) {
 	        IntSet set = new BinSearchIntSet();
@@ -121,6 +152,7 @@ public class BinSearchIntSet implements IntSet{
 	        System.out.println(set.contains(1)); // prints false
 	        System.out.println(set.contains(2)); // prints true
 	        System.out.println(set.contains(3)); // prints false
+	        System.out.println(set.contains(0)); // prints false
 
 		}
 

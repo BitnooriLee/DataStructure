@@ -1,4 +1,4 @@
-public class LinSearchIntSet implements IntSet {
+/*public class LinSearchIntSet implements IntSet {
    
    int[] set = new int[1];
    int size = 0;
@@ -35,22 +35,35 @@ public class LinSearchIntSet implements IntSet {
       int index = indexOf(element);
 
       if (index == -1) return;
-
+      
       int[] newSet = new int[set.length-1];
-      for (int i=0; i<set.length-1; i++) {
+      
+      for (int i=0; i<index; i++) {
          newSet[i] = set[i];
       }
-
       while (contains(element)) {
-         for (int i=index; i<set.length-1; i++) { // 5) 마찬가지로 뒤의 '0'은 볼 필요가 없으니께네~
+    	 index = indexOf(element);
+         for (int i=index; i<set.length-1; i++){ // 5) 마찬가지로 뒤의 '0'은 볼 필요가 없으니께네~
             newSet[i]=set[i+1]; // remove???
          }
          set = newSet;
             size--; // 4) 원소가 제거될 때마다 size를 감소시켜줌
-         index = indexOf(element);
+         //index = indexOf(element);
       }
    }
-      
+   
+   
+   
+public void remove(int element){
+	int index = indexOf(element);
+		while(contains(element)) {
+		for(int i=index; i<size-1; i++) {
+				set[i]=set[i+1]; // remove???
+			}
+		index = indexOf(element);
+		}
+	}
+ 
    public static void main(String[] args) {
         IntSet set = new LinSearchIntSet();
         set.add(1);
@@ -64,4 +77,71 @@ public class LinSearchIntSet implements IntSet {
         System.out.println(set.contains(0));
    }
 
+   }
+   
+   */
+
+
+public class LinSearchIntSet implements IntSet{
+	
+	int[] set = new int[1];
+	int size = 0;
+
+	public void add(int element) {
+	    	if(size==set.length) {
+	    		int [] newSet = new int[2*set.length];
+	    		for(int i=0; i<set.length; i++) {
+	    			newSet[i] = set[i];
+	    			}
+	    		set = newSet;
+	    		}
+	    	set[size] = element;
+	    	size++;
+	    }
+	public boolean contains(int element){
+		if(indexOf(element) == -1) {
+			return false;
+			
+		}return true;
+	}
+			
+	public int indexOf(int element){
+		for(int i=0; i<size; i++) {
+			if(element == set[i]) {
+				return i;
+			}
+		}
+		return -1;
+	}
+			
+	    	
+	   
+	public void remove(int element){
+		int index = indexOf(element);
+			while(contains(element)) {
+			for(int i=index; i<size-1; i++) {
+					set[i]=set[i+1]; // remove???
+				}
+			index = indexOf(element);
+			size--;
+			}
+		}
+	
+		
+	public static void main(String[] args) {
+        IntSet set = new LinSearchIntSet();
+        set.add(1);
+        set.add(2);
+        set.add(1);
+        set.remove(3);
+        set.remove(1);
+        System.out.println(set.contains(1)); // prints false
+        System.out.println(set.contains(2)); // prints true
+        System.out.println(set.contains(3)); // prints false
+
+	}
+
 }
+
+
+
