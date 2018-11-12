@@ -42,7 +42,7 @@ public class BinSearchIntSet implements IntSet{
     	}
 		
 		public boolean contains(int element){
-			sort();
+			//sort();
 			
 			int upperBound=size-1;
 			int lowerBound = 0;
