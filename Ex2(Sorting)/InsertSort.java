@@ -6,29 +6,46 @@ public class InsertSort{
 	
 	int[] array = {4,6,8,2,9,5,1,7,3};
 	
+	
 	public void Sort() {
+		int j ;
+		for(int i=1; i<array.length; i++) {
+			int temp = array[i];
+				for(j=i-1; j>-1&& array[j]>temp ; j--) {
+					array[j+1]=array[j];
+					}
+			array[j+1] = temp;
+				
+			}
+		
+		
+		
+	}
+	
+	
+	/*public void Sort() {
 		
 		for(int i=1; i<array.length; i++) {
 			for(int j=0; j<i; j++) {
 				if(array[j]>array[i]) {
 					int temp = array[i];
-					Shift(j,i);
+					//Shift(j,i);
 					array[j]=temp;
 				
 				}
 				
 			}
 		}
-	}
+	}*/
 		
 		
 	
 	
-	public void Shift(int index, int insert) {
+	/*public void Shift(int index, int insert) {
 		for(int i=insert-1;i>index-1; i--) {
 			array[i+1]=array[i];
 		}
-	}
+	}*/
 	
 	public void printArray() {
 		for(int i=0; i<array.length;i++) {
