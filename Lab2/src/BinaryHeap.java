@@ -1,3 +1,4 @@
+
 // BinaryHeap class
 //
 // CONSTRUCTION: with optional capacity (that defaults to 100)
@@ -84,7 +85,7 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>>
     public AnyType findMin( )
     {
         if( isEmpty( ) )
-            throw new UnderflowException( );
+        	throw new UnsupportedOperationException();
         return array[ 1 ];
     }
 
@@ -95,7 +96,7 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>>
     public AnyType deleteMin( )
     {
         if( isEmpty( ) )
-            throw new UnderflowException( );
+            throw new UnsupportedOperationException();
 
         AnyType minItem = findMin( );
         array[ 1 ] = array[ currentSize-- ];

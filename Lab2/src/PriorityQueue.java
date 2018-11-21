@@ -1,3 +1,5 @@
+
+
 import java.util.*;
 
 // A priority queue.
@@ -19,7 +21,7 @@ public class PriorityQueue<E> {
 	{
 		throw new UnsupportedOperationException();
 	}
-
+	
 	// Returns the smallest item in the priority queue.
 	// Throws NoSuchElementException if empty.
 	public E minimum() {
@@ -29,6 +31,36 @@ public class PriorityQueue<E> {
 		return heap.get(0);
 	}
 
+	public E get(int i) {
+		if(size() == 0) {
+			throw new NoSuchElementException();
+		}
+		return heap.get(parent(leftChild(i)));
+	}
+	
+	public void replace(E x, E y, int i) {
+		if(i > size()-1||size()==0) {
+			return;
+			//throw new NoSuchElementException();
+		}
+		E element = heap.get(i);
+		if(x == element) {
+			heap.set(i, y);
+			if(comparator.compare(y, x) < 0) {
+				siftDown(i);
+			}
+			else {
+				siftUp(i);
+			}
+		}
+		if(comparator.compare(x, element) < 0) {
+			replace(x, y, leftChild(i));
+		}
+		if(comparator.compare(x, element) > 0) {
+			replace(x, y, rightChild(i));
+		}
+	}
+	
 	// Removes the smallest item in the priority queue.
 	// Throws NoSuchElementException if empty.
 	public void deleteMinimum() {
@@ -44,7 +76,27 @@ public class PriorityQueue<E> {
 	// siftUp(index) fixes the invariant if the element at 'index' may
 	// be less than its parent, but all other elements are correct.
 	private void siftUp(int index) {
-		throw new UnsupportedOperationException();
+		E value = heap.get(index);
+
+		// Stop when the node is root.
+		while (parent(index) >= 0) {
+			int parentIndex = parent(index);
+			E parent = heap.get(parentIndex);
+
+			// ...but then check in case the right child is smaller.
+			// (We do it like this because maybe there's no right child.)
+			if (parentIndex >= 0) {
+				if (comparator.compare(value, parent) > 0) {
+					E temp = parent;
+					parent = value;
+					value = temp;
+					index = parentIndex;
+				}
+			} else break;
+			
+			heap.set(index, value);
+		}
+
 	}
 
 	// Sifts a node down.
@@ -84,6 +136,18 @@ public class PriorityQueue<E> {
 		heap.set(index, value);
 	}
 
+	public void insert( E x )
+    {
+		if (size() == 0) {
+			heap.add(x); return;
+		}
+			
+        int hole = heap.size();        
+        for(heap.set(0, x); comparator.compare(x, heap.get(hole/2))<0; hole /= 2) 
+        	heap.set(hole, heap.get(hole/2));
+        heap.set(hole, x);
+    }
+		
 	// Helper functions for calculating the children and parent of an index.
 	private final int leftChild(int index) {
 		return 2*index+1;
@@ -97,3 +161,5 @@ public class PriorityQueue<E> {
 		return (index-1)/2;
 	}
 }
+
+

@@ -1,11 +1,20 @@
+
 public class Bid {
    final public String name;
-    final public String action;
+   final public String action;
    final public int bid;
+   
+   public int compare(Bid A) {
+	  if (A.bid< this.bid) 
+           return 1; 
+       else if (A.bid> this.bid) 
+           return -1; 
+	   return 0;
+   }
 
    public Bid(String name, String action, int bid) {
       this.name = name;
-        this.action = action;
+      this.action = action;
       this.bid = bid;
    }
 
