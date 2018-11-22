@@ -141,12 +141,14 @@ public class PriorityQueue<E> {
 		if (size() == 0) {
 			heap.add(x); return;
 		}
-			
-        int hole = heap.size();        
+		int currentSize = heap.size(); 	
+        int hole = ++currentSize;       
         for(heap.set(0, x); comparator.compare(x, heap.get(hole/2))<0; hole /= 2) 
         	heap.set(hole, heap.get(hole/2));
         heap.set(hole, x);
     }
+
+	   
 		
 	// Helper functions for calculating the children and parent of an index.
 	private final int leftChild(int index) {

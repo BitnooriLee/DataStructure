@@ -90,6 +90,7 @@ public class Lab2 {
             System.out.println(buy_pq.get(i).toString());
         }
 
+
         //System.out.println("----------------------------------------");
 
       sb.append("Order book:\n");
