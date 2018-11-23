@@ -1,5 +1,3 @@
-
-
 import java.io.*;
 import java.util.*;
 
@@ -31,7 +29,7 @@ public class Lab2 {
             throw new RuntimeException("line " + line_no + ": invalid price");
          }
 
-            System.out.println("data: " + name + ", " + action + ", " + price + (parts.length==4?(", " + parts[3]):""));
+            //System.out.println("data: " + name + ", " + action + ", " + price + (parts.length==4?(", " + parts[3]):""));
 
          if( action.equals("K") ) {
             // TODO: add new buy bid
@@ -42,14 +40,14 @@ public class Lab2 {
          } else if( action.equals("NK") ){
             // TODO: update existing buy bid. use parts[3].
             //    int index = buy_pq.indexOf(new Bid(name, "K", price));
-            buy_pq.replace(new Bid(name, "K", Integer.parseInt(parts[2])), 
-            				new Bid(name, "K", Integer.parseInt(parts[3])), 0);
+        	 buy_pq.delete(new Bid(name, "K", Integer.parseInt(parts[2])));
+             buy_pq.insert(new Bid(name, "K", Integer.parseInt(parts[3])));
 
          } else if( action.equals("NS") ){
             // TODO: update existing sell bid. use parts[3].
              //   int index = sell_pq.indexOf(new Bid(name, "S", price));
-                buy_pq.replace(new Bid(name, "S", Integer.parseInt(parts[2])), 
-        				new Bid(name, "S", Integer.parseInt(parts[3])), 0);
+        	 	sell_pq.delete(new Bid(name, "S", Integer.parseInt(parts[2])));
+                sell_pq.insert(new Bid(name, "S", Integer.parseInt(parts[3])));
                 
          } else {
             throw new RuntimeException(
@@ -61,17 +59,18 @@ public class Lab2 {
          String sellerName;
          String buyerName;
          Integer priceAmount;
-         
-         StringBuilder string = new StringBuilder();
-         
+                  
          if(sell_pq.get(0).bid <=  buy_pq.get(0).bid) {
-        	 sellerName = sell_pq.get(0).name;
-        	 buyerName = buy_pq.get(0).name;
-        	 priceAmount = buy_pq.get(0).bid;
-        	 sell_pq.deleteMinimum();
-        	 buy_pq.deleteMinimum();
-        	 System.out.println(buyerName + " buys a share from " + sellerName + 
- 		 			" for " + Integer.toString(priceAmount) + "kr");
+        	 
+        	 Bid buyer = buy_pq.poll();
+        	 Bid seller = sell_pq.poll();
+        	 
+        	 sellerName = seller.name;
+        	 buyerName = buyer.name;
+        	 priceAmount = seller.bid;
+
+        	 sb.append(buyerName + " buys a share from " + sellerName + 
+ 		 			" for " + Integer.toString(priceAmount) + " kr\n");
          }
          // TODO:
          // compare the bids of highest priority from each of
@@ -82,36 +81,32 @@ public class Lab2 {
          // transaction to the output.
       }
 
-        for (int i=0; i<sell_pq.size(); i++) {
-            System.out.println(sell_pq.get(i).toString());
-        }
-
-        for (int i=0; i<buy_pq.size(); i++) {
-            System.out.println(buy_pq.get(i).toString());
-        }
-
-
-        //System.out.println("----------------------------------------");
-
-      sb.append("Order book:\n");
+      sb.append("\nOrderbook:\n");
 
       sb.append("Sellers: ");
-      // TODO: print remaining sellers.
-      //       can remove from priority queue until it is empty.
-      for(int i = 0; i < sell_pq.size(); i++) {
-    	  sb.append(sell_pq.get(i).name + " " + sell_pq.get(i).bid);
-    	  if(i != sell_pq.size() - 1) {
+      
+      int sellSize = sell_pq.size();
+      for(int i = 0; i < sellSize; i++) {
+    	  Bid min = sell_pq.poll();
+    	  sb.append(min.name + " " + min.bid);
+    	  if(i != sellSize - 1) {
     		  sb.append(", ");
     	  }
       }
+      
+//      for(int i = 0; i < sell_pq.size(); i++) {
+//    	  sb.append(sell_pq.get(i).name + " " + sell_pq.get(i).bid);
+//    	  if(i != sell_pq.size() - 1) {
+//    		  sb.append(", ");
+//    	  }
+//      }
 
-      sb.append("Buyers: ");
-      // TODO: print remaining buyers
-      //       can remove from priority queue until it is empty.
-
-      for(int i = buy_pq.size()-1; i >= 0; i--) {
-    	  sb.append(buy_pq.get(i).name + " " + buy_pq.get(i).bid);
-    	  if(i != 0) {
+      sb.append("\nBuyers: ");
+      int buySize = buy_pq.size();
+      for(int i = 0; i < buySize; i++) {
+    	  Bid min = buy_pq.poll();
+    	  sb.append(min.name + " " + min.bid);
+    	  if(i != buySize - 1) {
     		  sb.append(", ");
     	  }
       }
@@ -139,5 +134,3 @@ public class Lab2 {
       System.out.println(lab2.pureMain(lines.toArray(new String[lines.size()])));
    }
 }
-
-
