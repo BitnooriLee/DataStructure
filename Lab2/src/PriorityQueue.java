@@ -37,8 +37,7 @@ public class PriorityQueue<E> {
     }
     
     public int indexOf(E x) {
-    	int i = 0;
-    	for(i = 0; i < heap.size(); i++) {
+    	for(int i = 0; i < heap.size(); i++) {
     		if(comparator.compare(heap.get(i), x) == 0) {
     			return i;
     		}
@@ -48,7 +47,6 @@ public class PriorityQueue<E> {
     
     public void delete(E x) {
     	int elementIndex = indexOf(x);
-    	System.out.println("INDEX: " + elementIndex);
     	if(elementIndex == -1) {
     		return;
     	}
@@ -65,10 +63,10 @@ public class PriorityQueue<E> {
     		return;
     	}
     	siftDown(elementIndex);
-    	if(comparator.compare(y, heap.get(parent(elementIndex))) > 0) {
+    	if(comparator.compare(y, heap.get(parent(elementIndex))) < 0) {
     		siftUp(elementIndex);
     	}
-    	if(comparator.compare(y, heap.get(parent(elementIndex))) < 0) {
+    	if(comparator.compare(y, heap.get(parent(elementIndex))) > 0) {
     		siftDown(elementIndex);
     	}
     }
@@ -85,8 +83,8 @@ public class PriorityQueue<E> {
     }
 
     public E poll() {
-    	E val = heap.get(0);
-    	deleteMinimum();
+    	E val = minimum();
+    	delete(val);
     	return val;
     }
     
@@ -148,7 +146,6 @@ public class PriorityQueue<E> {
    {
     	 heap.add(x);
 		 siftUp(heap.size()-1);
-//		 siftDown(0);
    }
         
     // Helper functions for calculating the children and parent of an index.
