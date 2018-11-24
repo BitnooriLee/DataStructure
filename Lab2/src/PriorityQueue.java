@@ -4,6 +4,7 @@ import java.util.*;
 public class PriorityQueue<E> {
     private ArrayList<E> heap = new ArrayList<E>();
     private Comparator<E> comparator;
+    private HashMap<E, Integer> hashMap = new HashMap<E, Integer>(); // ???
 
     public PriorityQueue(Comparator<E> comparator) {
         this.comparator = comparator;
@@ -37,6 +38,8 @@ public class PriorityQueue<E> {
     }
     
     public int indexOf(E x) {
+    	//if (hashMap.containsKey(x)) { return hashMap.get(x); } else { return -1;} 
+    	
     	for(int i = 0; i < heap.size(); i++) {
     		if(comparator.compare(heap.get(i), x) == 0) {
     			return i;
@@ -57,6 +60,8 @@ public class PriorityQueue<E> {
     	E y = heap.get(heap.size()-1);
     	heap.set(elementIndex, y);
     	heap.remove(heap.size()-1);
+    	hashMap.put(y,elementIndex);
+    	hashMap.remove(x);
 
     	if(elementIndex == heap.size() || heap.size() == 0) {
     		// Element was the last element, nothing needs to be done
@@ -79,6 +84,8 @@ public class PriorityQueue<E> {
 
         heap.set(0, heap.get(heap.size()-1));
         heap.remove(heap.size()-1);
+        hashMap.put(heap.get(heap.size()-1), 0);
+        hashMap.remove(heap.size()-1);
         if (heap.size() > 0) siftDown(0);
     }
 
@@ -96,19 +103,26 @@ public class PriorityQueue<E> {
         E tmp;
         if (nodeIndex != 0) {
               parentIndex = parent(nodeIndex);
-              if (comparator.compare(heap.get(parentIndex), 
-            		  heap.get(nodeIndex)) > 0) {
+              if (comparator.compare(heap.get(parentIndex), heap.get(nodeIndex)) > 0) {
                     tmp = heap.get(parentIndex);
                     heap.set(parentIndex, heap.get(nodeIndex));
                     heap.set(nodeIndex, tmp);
+                    
+                    
+                    int indexTemp = hashMap.get(heap.get(parentIndex));
+                    hashMap.put(heap.get(parentIndex), nodeIndex);
+                    hashMap.put(heap.get(nodeIndex), indexTemp);
+                    
+                    
                     siftUp(parentIndex);
               }
         }
   }
-
     // Sifts a node down.
     // siftDown(index) fixes the invariant if the element at 'index' may
     // be greater than its children, but all other elements are correct.
+    
+    
     private void siftDown(int index) {
         E value = heap.get(index);
 
@@ -118,11 +132,11 @@ public class PriorityQueue<E> {
             int right   = rightChild(index);
 
             // Work out whether the left or right child is smaller.
-            // Start out by assuming the left child is smaller...
+            // Start out by assuming the left child is smaller…
             int child = left;
             E childValue = heap.get(left);
 
-            // ...but then check in case the right child is smaller.
+            // …but then check in case the right child is smaller.
             // (We do it like this because maybe there's no right child.)
             if (right < heap.size()) {
                 E rightValue = heap.get(right);
@@ -137,16 +151,21 @@ public class PriorityQueue<E> {
             if (comparator.compare(value, childValue) > 0) {
                 heap.set(index, childValue);
                 index = child;
+                
+               hashMap.put(childValue, index);
             } else break;
         }
         heap.set(index, value);
+       hashMap.put(value, index);
     }
+    
 
     public void insert( E x )
-   {
-    	 heap.add(x);
-		 siftUp(heap.size()-1);
-   }
+    {
+     	 heap.add(x);
+     	 hashMap.put(x, heap.size()-1);
+ 		 siftUp(heap.size()-1);
+    }
         
     // Helper functions for calculating the children and parent of an index.
     private final int leftChild(int index) {
