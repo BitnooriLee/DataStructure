@@ -40,14 +40,16 @@ public class Lab2 {
          } else if( action.equals("NK") ){
             // TODO: update existing buy bid. use parts[3].
             //    int index = buy_pq.indexOf(new Bid(name, "K", price));
-        	 buy_pq.delete(new Bid(name, "K", Integer.parseInt(parts[2])));
-             buy_pq.insert(new Bid(name, "K", Integer.parseInt(parts[3])));
+        	 Bid oldBid = new Bid(name, "K", Integer.parseInt(parts[2]));
+     	 	 Bid newBid = new Bid(name, "K", Integer.parseInt(parts[3]));
+     	 	 buy_pq.update(oldBid, newBid);
 
          } else if( action.equals("NS") ){
             // TODO: update existing sell bid. use parts[3].
              //   int index = sell_pq.indexOf(new Bid(name, "S", price));
-        	 	sell_pq.delete(new Bid(name, "S", Integer.parseInt(parts[2])));
-                sell_pq.insert(new Bid(name, "S", Integer.parseInt(parts[3])));
+        	 	Bid oldBid = new Bid(name, "S", Integer.parseInt(parts[2]));
+        	 	Bid newBid = new Bid(name, "S", Integer.parseInt(parts[3]));
+        	 	sell_pq.update(oldBid, newBid);
                 
          } else {
             throw new RuntimeException(
