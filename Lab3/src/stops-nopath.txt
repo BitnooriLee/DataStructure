@@ -1,0 +1,4 @@
+Lidköping 270 350
+Göteborg 100 100
+Stockholm 900 600
+Götene 320 370
