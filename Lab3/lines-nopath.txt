@@ -1,0 +1,17 @@
+1 2
+Göteborg
+Stockholm 10
+		
+2 3
+Göteborg
+Lidköping 5
+Stockholm 8
+		
+3 3
+Stockholm
+Lidköping 8
+Göteborg 5
+
+4 2
+Stockholm
+Göteborg 10
