@@ -3,7 +3,7 @@ public class SellComparator implements Comparator<Bid>{
     	if(a.bid > b.bid) {
     		return 1;
     	}
-    	if(a.toString().equals(b.toString())) {
+    	if(a.bid == b.bid && a.name == b.name) {
     		return 0;
     	}
     	else {
@@ -13,18 +13,3 @@ public class SellComparator implements Comparator<Bid>{
 }
 
 
-
-
-
-/*public class SellComparator implements Comparator<Bid> {
-	
-	public int compare(Bid a, Bid b) {
-		
-		if (a.bid < b.bid) 
-	           return 1; 
-	    else 
-	           return -1; 
-		
-	}
-
-}*/
