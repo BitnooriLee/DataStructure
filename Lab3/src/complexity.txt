@@ -1,0 +1,13 @@
+The assignment is to create an implementation of Dijkstras' shortest path algorithm with
+a complexity of less than or equal to O(nlog n) where n = |E| + |V| 
+
+|E| = edges
+|V| = vertices
+
+Our implementation uses a a while loop to look through every node giving a complexity of
+O(|V|). Within this while-loop a minHeap is used to poll the next vertex to be examined
+this has complexity O(log |V|). There are other methods used in the
+function but these either take constant time or don't add anything to the acutal complexity.
+
+The above complexites combine into the overall complexity O(|V|(log|V|)), this is
+better than the assigned complexity O(n(log n))
