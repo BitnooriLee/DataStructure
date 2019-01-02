@@ -5,28 +5,6 @@ public class BinSearchIntSet implements IntSet{
 	int indexOfElement = 0;
 	int size = 0;
 
-	/*public void add(int element) {
-					
-		if(!contains(element)) {
-			int[] newSet = new int[set.length+1];
-			newSet[] = 
-			
-			indexOfElement = newSet.length-1;
-			for(int i=0; i<indexOfElement; i++) {
-				newSet[i] = set[i];
-			}		    	
-			newSet[indexOfElement] = element;
-			
-			for(int i=indexOfElement+1;i<set.length;i++) {
-				newSet[i+1] = set[i];
-			}
-			set = newSet;
-		}
-			
-	   return;
-	   
-	 }*/
-	
 	
 	public void add(int element) {
     	if(!(contains(element))) {
