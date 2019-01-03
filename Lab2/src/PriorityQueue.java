@@ -4,7 +4,7 @@ import java.util.*;
 public class PriorityQueue<E> {
     private ArrayList<E> heap = new ArrayList<E>();
     private Comparator<E> comparator;
-    private Map<E, Integer> hashMap = new HashMap<>(); // ???
+    private Map<E,Integer> hashMap = new HashMap<>(); // Map has HashMap
 
     public PriorityQueue(Comparator<E> comparator) {
         this.comparator = comparator;
@@ -82,8 +82,7 @@ public class PriorityQueue<E> {
     	heap.remove(heap.size()-1);
     	
 
-    	if(elementIndex == heap.size() || heap.size() == 0) {
-    		// Element was the last element, nothing needs to be done
+    	if(elementIndex == heap.size() || heap.size() == 0) { // Element was the last element, nothing needs to be done
     		return;
     	}
     	siftDown(elementIndex);
@@ -151,7 +150,6 @@ public class PriorityQueue<E> {
     // siftDown(index) fixes the invariant if the element at 'index' may
     // be greater than its children, but all other elements are correct.
     // Complexity O(log n)
-    
     private void siftDown(int index) {
         E value = heap.get(index);
 
@@ -161,11 +159,11 @@ public class PriorityQueue<E> {
             int right   = rightChild(index);
 
             // Work out whether the left or right child is smaller.
-            // Start out by assuming the left child is smaller�
+            // Start out by assuming the left child is smaller
             int child = left;
             E childValue = heap.get(left);
 
-            // �but then check in case the right child is smaller.
+            // but then check in case the right child is smaller.
             // (We do it like this because maybe there's no right child.)
             if (right < heap.size()) {
                 E rightValue = heap.get(right);
@@ -240,8 +238,7 @@ public class PriorityQueue<E> {
  			}
  			sb.append(heap.get(current) + " ");
  			current += 1;
- 		}
- 		
+ 		}	
  		return sb.toString();
  	}
     
