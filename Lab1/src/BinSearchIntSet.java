@@ -20,12 +20,10 @@ public class BinSearchIntSet implements IntSet{
     	}
 		
 		public boolean contains(int element){
-			//sort();
-			
+			//sort();			
 			int upperBound=size-1;
 			int lowerBound = 0;
-			
-			
+				
 			while(lowerBound <= upperBound) {
 				int mid = (lowerBound+upperBound)/2;
 				if(element<set[mid]) {
@@ -65,61 +63,19 @@ public class BinSearchIntSet implements IntSet{
 			}
 			return -1;
 		}
-		
 						    	
-		  		   
-		/*public void remove(int element){
-			int index = indexOf(element);
-			if (index == -1) return;
-			if(set.length==0) return;
-			
-			int[] newSet = new int[set.length-1];
-			
-				for(int i=0; i<index; i++) {
-					newSet[i]=set[i];
-				}
-				while(contains(element)) {
-				for(int i=index; i<set.length-1; i++) {
-						newSet[i]=set[i+1]; // remove???
-					}
-				set = newSet;
-				index = indexOf(element);
-				}
-			}*/
-		
-		
-	/*	public void remove(int element){
-			//if (index == -1) return;
-			if(set.length==0) return;
-			
-			int[] newSet = new int[set.length-1];
-			
-				for(int i=0; i<indexOfElement; i++) {
-					newSet[i]=set[i];
-				}
-				while(contains(element)) {
-				for(int i=indexOfElement; i<set.length-1; i++) {
-						newSet[i]=set[i+1]; // remove???
-					}
-				set = newSet;
-				//index = indexOfElement;
-				}
-			}
-		*/
-		
-		   
+
 		public void remove(int element){
 			int index = indexOf(element);
 				while(contains(element)) {
 				for(int i=index; i<size-1; i++) {
-						set[i]=set[i+1]; // remove???
+						set[i]=set[i+1]; 
 					}
 				index = indexOf(element);
 				size--;
 				}
 			}
-			
-		
+					
 		public static void main(String[] args) {
 	        IntSet set = new BinSearchIntSet();
 	        set.add(1);
@@ -133,5 +89,4 @@ public class BinSearchIntSet implements IntSet{
 	        System.out.println(set.contains(0)); // prints false
 
 		}
-
 	}

@@ -17,7 +17,6 @@ public class Sort {
       return;
    }
 
-   
    public static void main(String[] args) {
       Sort m = new Sort();
       m.sorting();
