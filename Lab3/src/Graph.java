@@ -115,7 +115,7 @@ public class Graph { //class
 		Path path = new Path(vertices.get(dest).minDistance,temp); //new LinkedList<String>
 		
 		return vertices.get(dest).minDistance==Integer.MAX_VALUE? null:path;
-    } // TODO: change return type ?
+    } 
 
 	public static void main(String[] arg) {
 		Graph g = new Graph();
