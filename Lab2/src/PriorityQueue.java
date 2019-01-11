@@ -79,7 +79,7 @@ public class PriorityQueue<E> {
     	
     	E y = heap.get(heap.size()-1);
     	heap.set(elementIndex, y);
-    	heap.remove(heap.size()-1);
+    	heap.remove(heap.size()-1); //지우려는 target 과 바꾼다음 맨 마지막걸 지움 
     	
 
     	if(elementIndex == heap.size() || heap.size() == 0) { // Element was the last element, nothing needs to be done
