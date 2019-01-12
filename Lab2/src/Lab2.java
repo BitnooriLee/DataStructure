@@ -96,12 +96,6 @@ public class Lab2 {
     	  }
       }
       
-//      for(int i = 0; i < sell_pq.size(); i++) {
-//    	  sb.append(sell_pq.get(i).name + " " + sell_pq.get(i).bid);
-//    	  if(i != sell_pq.size() - 1) {
-//    		  sb.append(", ");
-//    	  }
-//      }
 
       sb.append("\nBuyers: ");
       int buySize = buy_pq.size();
